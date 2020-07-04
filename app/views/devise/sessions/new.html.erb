@@ -1,0 +1,41 @@
+<hgroup class="heading">
+<h1 class="major">Login Form </h1>
+</hgroup>
+
+<div class="sign-up">
+  <h1 class="sign-up-title">Sign up in seconds</h1>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+    <div class="field">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "sign-up-input", placeholder: "Email address" %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password, autocomplete: "current-password", class: "sign-up-input", placeholder: "Password" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Log in", class: "sign-up-button" %>
+    </div>
+  <% end %>
+  <div class="legal-text">
+    続行することで、Romanticの
+    <%= link_to "利用規約", "#" %>
+    および
+    <%= link_to "プライバシー規約", "#" %>
+    に同意するものとみなされます。
+  </div>
+  <div class="box-newusr">
+      <p><span>--------------</span> 登録がお済みでない方 <span>--------------</span></p>
+      <%= link_to "Romanticアカウントを作成", new_user_registration_path %>
+  </div>
+
+</div>
+
