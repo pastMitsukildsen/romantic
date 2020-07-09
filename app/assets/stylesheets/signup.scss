@@ -127,7 +127,7 @@ table {
 body {
   font: 13px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #404040;
-  background: #596778;
+  background: #596778 !important;
 }
 
 .sign-up {
@@ -219,6 +219,7 @@ input {
   width: 100%;
   height: 54px;
   padding: 0;
+  margin-bottom: 20px;
   font-size: 22px;
   color: white;
   text-align: center;

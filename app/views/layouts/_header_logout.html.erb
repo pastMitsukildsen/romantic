@@ -1,0 +1,13 @@
+<nav class="nav navbar-brand navbar-left header-logo">
+    <%= link_to 'Romantic', root_path %>
+</nav>
+<nav>
+  <ul class="nav navbar-nav navbar-right">
+  	<li>
+  		<%= link_to ' 新規登録', new_user_registration_path, class: 'glyphicon glyphicon-edit sign_up' %>
+  	</li>
+    <li>
+    	<%= link_to ' ログイン', new_user_session_path, class: 'glyphicon glyphicon-log-in sign_in' %>
+    </li>
+  </ul>
+</nav>
