@@ -19,7 +19,7 @@ https://docs.google.com/spreadsheets/d/1U2JrGthMqstkUSCYekR4GfTydrMtD_-JxQ1sbtCG
 
 ## インストール
 ```
-$ git clone 
+$ git clone https://github.com/mitsukildsen/romantic.git
 $ cd Romantic
 $ rails db:migrate
 $ rails db:seed
