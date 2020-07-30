@@ -1,3 +1,136 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.profile-nav {
+	text-align: center;
+  height: 4.25em;
+  cursor: default;
+  margin-top: 20px;
+}
+.profile-item {
+  display: inline-block;
+  line-height: 0.9em;
+  font-size: 2.5em;
+  margin: 0 0.25em 0 0.25em;
+}
+
+.follow-group {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.follow-btn {
+  margin: 20px 250px;
+}
+
+.icon {
+	color: white;
+}
+.folow {
+	color: #337ab7;
+}
+nav a.active {
+	opacity: 1.0;
+}
+.profile-main {
+	position: relative;
+    overflow: hidden;
+    width: 100%;
+    background: #ffffff;
+}
+
+.profile-left {
+	padding: 74px;
+}
+
+.user-name {
+	line-height: 1.25em;
+	text-align: center;
+}
+
+.user-introduction {
+  text-align: center;
+}
+
+.profile-right {
+  padding: 40px;
+}
+
+.profile-img {
+	width: 100%;
+	height: 100%;
+}
+
+//edit page
+
+.section-title {
+	margin-bottom: 25px;
+    text-align: center;
+}
+
+.registration-button {
+  position: relative;
+  vertical-align: top;
+  width: 20%;
+  height: 54px;
+  padding: 0;
+  margin-left: 18px;
+  margin-top: 25px;
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: #f0776c;
+  border: 0;
+  border-bottom: 2px solid #d76b60;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 -2px #d76b60;
+  box-shadow: inset 0 -2px #d76b60;
+}
+
+// マイページの投稿一覧
+
+.edit-destroy-btn {
+  text-align: center;
+}
+
+.plan-edit-btn {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  border-radius: 3px;
+  transition: .4s;
+  margin-right: 15px;
+}
+
+.plan-edit-btn:hover {
+  background: #67c5ff;
+  color: white;
+}
+
+.plan-destroy-btn {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #ff3300;
+  border: solid 2px #ff3300;
+  border-radius: 3px;
+  transition: .4s;
+}
+
+.plan-destroy-btn:hover {
+  background: #ff3300;
+  color: white;
+}
+
+

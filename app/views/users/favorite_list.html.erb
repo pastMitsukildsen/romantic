@@ -1,0 +1,57 @@
+<div class="container">
+	<div class="row">
+		<h2 class="plan-headline">お気に入り</h2>
+		<div class="plan-box">
+		    <% @plans.each do |plan| %>
+		        <div class="plan-item col-xs-4">
+		        	<!-- アイコン -->
+	        		<div class="user-image">
+	        			<%= link_to user_path(plan.plan.user) do %>
+	        		        <%= attachment_image_tag plan.plan.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no-image-mini.jpg", class: "user-icon" %>
+	        		        <span><%= plan.plan.user.name %></span>
+	        		    <% end %>
+	        	    </div>
+		        	<!-- 投稿画像 -->
+		        	<div>
+                        <%= link_to plan_path(plan.plan) do %>
+			        		<%= attachment_image_tag plan.plan, :image, size: "200x200", class: "plan-image" %>
+			        	<% end %>
+		        	</div>
+		        	<section class="plan-text">
+		        	    <!-- 投稿タイトル -->
+		        	    <div class="plan-title">
+		        		    <%= plan.plan.title %>
+		                </div>
+		                <!-- ジャンル -->
+		                <div class="genre">
+	                    	<% if plan.plan.genre == true %>
+								日帰り
+								<% else %>
+								泊まり
+							<% end %>
+	                    </div>
+		                <!-- 投稿日付 lメソッドを使って書式を指定する -->
+		        	    <p class="plan-date"><%= l plan.plan.created_at %></p>
+		        	    <div class="comment-favorites">
+		        	    	<!-- コメント数 -->
+	                        <i class="fa fa-comment"></i>
+								 <%= link_to "#{plan.plan.plan_comments.count}", plan_path(plan.id) %>
+                            <!-- いいね数 -->
+						    <% if plan.plan.favorited_by?(current_user) %>
+						        <%= link_to plan_favorites_path(plan.plan), method: :delete do %>
+								<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+								<%= plan.plan.favorites.count %>
+								<% end %>
+	                        <% else %>
+	                            <%= link_to plan_favorites_path(plan.plan), method: :post do %>
+				                <i class="fa fa-heart-o" aria-hidden="true"></i>
+				                <%= plan.plan.favorites.count %>
+				                <% end %>
+				            <% end %>
+			            </div>
+	                </section>
+		        </div>
+		    <% end %>
+		</div>
+	</div>
+</div>

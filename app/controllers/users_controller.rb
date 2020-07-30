@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+    @plans = @user.plans
   end
 
   def edit
@@ -25,6 +26,21 @@ class UsersController < ApplicationController
     user.destroy
     flash[:success] = "アカウントを削除しました"
     redirect_to root_path
+  end
+
+  def follows
+    @user = User.find(params[:id])
+    @users = @user.followings
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
+  end
+
+  def favorite_list
+    @user = User.find(params[:id])
+    @plans = @user.favorites
   end
 
   private

@@ -15,3 +15,79 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+ /* 全体 */
+ * {
+   font-family: "ヒラギノ丸ゴ Pro W4","Nunito","Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体", sans-serif;
+ }
+ .clearfix::after {
+   content: "";
+   display: block;
+   clear: both;
+ }
+
+ body {
+  margin-bottom: 40px;
+  background: #BA5370;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #F4E2D8, #BA5370);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #F4E2D8, #BA5370); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-size: cover;
+ }
+
+ header {
+   width: 100%;
+   height: 52px;
+   background-color: #000000;
+ }
+
+ .logo {
+   height: 40px;
+   margin-top: 5px;
+   margin-left: 5px;
+ }
+
+
+
+ .nav-menu-li {
+   float: right;
+   width: 120px;
+   line-height: 70px;
+   color: #FAFAFA;
+   padding: 0 30px;
+   list-style: none;
+   font-size: 16px;
+}
+
+ .sign-up-input {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 25px;
+  padding: 0 15px 2px;
+  font-size: 17px;
+  background: white;
+  border: 2px solid #ebebeb;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 -2px #ebebeb;
+  box-shadow: inset 0 -2px #ebebeb;
+}
+
+.introduction {
+   height: 120px;
+}
+
+.back-btn {
+  width: 50%;
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: #4682b4;
+  border: 0;
+  border-bottom: 2px solid #d76b60;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+ footer{
+   margin-top: 85px;
+ }

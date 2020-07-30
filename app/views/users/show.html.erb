@@ -1,2 +1,128 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="wrapper">
+			<nav class="profile-nav">
+				<ul>
+					<% if @user == current_user %>
+					<li class="profile-item">
+						<%= link_to "", edit_user_path(@user), class: "fas fa-edit icon" %>
+					</li>
+					<% end %>
+					<li class="profile-item">
+						<%= link_to "", plans_path, class: "fa fa-camera icon" %>
+					</li>
+					<li class="profile-item">
+						<%= link_to "", user_favorites_path, class: "fab fa-gratipay icon" %>
+					</li>
+					<li class="profile-item">
+						<%= link_to "", new_plan_path, class: "far fa-paper-plane icon" %>
+					</li>
+				</ul>
+			</nav>
+			<div class="profile-main">
+				<div class="profile-left col-lg-8">
+					<h1 class="user-name"><%= @user.name %></h1>
+					<p class="user-introduction"><%= @user.introduction %></p>
+					<!-- フォローリンク -->
+					<div class="follow-group">
+				    	<tr>
+				    		<th>
+						    	<%= link_to "", users_follows_path, class: "fas fa-user profile-item folow" %>
+						    </th>
+						    <th>
+						        <%= link_to @user.followings.count, users_follows_path %>フォロー</th>
+						    <th>
+						    <th>
+						    	<%= link_to "", users_followers_path, class: "far fa-user profile-item folow" %>
+				            </th>
+				            <th>
+				                <%= link_to @user.followers.count, users_followers_path %>フォロワー
+				            </th>
+				            <th>
+				            	<% unless current_user == @user %>
+				            	<div class="follow-btn">
+								  <% if current_user.following?(@user) %>
+								    <%= form_for(current_user.relationships.find_by(follow_id: @user.id), html: { method: :delete }) do |f| %>
+								      <%= hidden_field_tag :follow_id, @user.id %>
+								      <%= f.submit 'フォロー外す', class: 'btn btn-danger btn-block' %>
+								    <% end %>
+								  <% else %>
+								    <%= form_for(current_user.relationships.build) do |f| %>
+								      <%= hidden_field_tag :follow_id, @user.id %>
+								      <%= f.submit 'フォローする', class: 'btn btn-primary btn-block' %>
+								    <% end %>
+								  <% end %>
+							    </div>
+								<% end %>
+				            </th>
+					    </tr>
+			        </div>
+			    </div>
+	            <!-- プロフィール画像 -->
+			    <div class="profile-right col-lg-4">
+			    	<%= attachment_image_tag(@user, :profile_image, size: "170x170", fallback: "pic02.jpg", class: "profile-img") %>
+			    </div>
+			</div>
+		</div>
+		<!-- ここから投稿一覧 -->
+		<div class="plan-box">
+		    <% @plans.each do |plan| %>
+		        <div class="plan-item col-xs-4">
+		        	<!-- アイコン -->
+	        		<div class="user-image">
+	        			<%= link_to user_path(plan.user) do %>
+	        		        <%= attachment_image_tag plan.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no-image-mini.jpg", class: "user-icon" %>
+	        		        <span><%= plan.user.name %></span>
+	        		    <% end %>
+	        	    </div>
+		        	<!-- 投稿画像 -->
+		        	<div>
+                        <%= link_to plan_path(plan) do %>
+			        		<%= attachment_image_tag plan, :image, size: "200x200", class: "plan-image" %>
+			        	<% end %>
+		        	</div>
+		        	<section class="plan-text">
+		        	    <!-- 投稿タイトル -->
+		        	    <div class="plan-title">
+		        		    <%= plan.title %>
+		                </div>
+		                <!-- ジャンル -->
+		                <div class="genre">
+	                    	<% if plan.genre == true %>
+								日帰り
+								<% else %>
+								泊まり
+							<% end %>
+	                    </div>
+		                <!-- 投稿日付 lメソッドを使って書式を指定する -->
+		        	    <p class="plan-date"><%= l plan.created_at %></p>
+		        	    <div class="comment-favorites">
+		        	    	<!-- コメント数 -->
+	                        <i class="fa fa-comment"></i>
+								 <%= link_to "#{plan.plan_comments.count}", plan_path(plan.id) %>
+                            <!-- いいね数 -->
+						    <% if plan.favorited_by?(current_user) %>
+						        <%= link_to plan_favorites_path(plan), method: :delete do %>
+								<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+								<%= plan.favorites.count %>
+								<% end %>
+	                        <% else %>
+	                            <%= link_to plan_favorites_path(plan), method: :post do %>
+				                <i class="fa fa-heart-o" aria-hidden="true"></i>
+				                <%= plan.favorites.count %>
+				                <% end %>
+				            <% end %>
+			            </div>
+                        <!-- 編集・削除ボタン -->
+		        	    <div class="edit-destroy-btn">
+			        	    <% if plan.user == current_user %>
+								<%= link_to "編集",edit_plan_path(plan), class: "plan-edit-btn" %>
+								<%= link_to "削除",plan, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "plan-destroy-btn" %>
+							<% end %>
+                        </div>
+	                </section>
+		        </div>
+		    <% end %>
+		</div>
+	</div>
+</div>

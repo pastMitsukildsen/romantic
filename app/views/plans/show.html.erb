@@ -1,0 +1,127 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-8">
+			<div class="plan-show">
+				<div class="plan-title-show">
+					<%= @plan.title %>
+					<span>
+	                	<% if @plan.genre == true %>
+							(日帰り)
+							<% else %>
+							(泊まり)
+						<% end %>
+		            </span>
+                    <!-- いいね機能 -->
+					<% if @plan.favorited_by?(current_user) %>
+						<%= link_to plan_favorites_path(@plan), method: :delete do %>
+						<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+						<%= @plan.favorites.count %>
+						<% end %>
+					<% else %>
+						<%= link_to plan_favorites_path(@plan), method: :post do %>
+		                <i class="fa fa-heart-o" aria-hidden="true"></i>
+		                <%= @plan.favorites.count %>
+		                <% end %>
+		            <% end %>
+		            <!-- ここまで -->
+		        </div>
+	            <!-- 投稿画像 -->
+	            <div>
+	            	<%= attachment_image_tag @plan, :image, size: "200x400", class: "plan-image-show" %>
+	            </div>
+	            <!-- ポイント -->
+	            <div class="plan-point fas fa-neuter">
+	            	<%= @plan.point %>
+	            </div>
+	            <!-- 説明 -->
+	            <div class="plan-body">
+	            	<%= @plan.body %>
+	            </div>
+			</div>
+			<!-- コメント一覧 -->
+			<ol>
+			<% @plan.plan_comments.each do |plan_comment| %>
+			    <li class="comment clearfix">
+		            <div class="comment-avatar">
+		                <div class="avatar">
+		                	<%= link_to user_path(plan_comment.user) do %>
+		                    <%= attachment_image_tag(plan_comment.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg", class: "user-icon") %>
+		                    <% end %>
+		                </div>
+		            </div>
+		            <div class="comment-text">
+		                <div class="comment-author clearfix">
+		                	<div class="comment-user">
+		                        <%= plan_comment.user.name %>
+		                        <span class="comment-meta">
+		                        <span class="comment-date"><%= l plan_comment.created_at %></span>
+		                        </span>
+		                    </div>
+		                </div>
+		                <div class="comment-entry"><%= plan_comment.comment %></div>
+		                <% if plan_comment.user == current_user%>
+						  <div>
+						    <%= link_to "削除", plan_plan_comment_path(plan_comment.plan, plan_comment), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger pull-right" %>
+						  </div>
+						<% end %>
+		            </div>
+			    </li>
+			<% end %>
+		    </ol>
+		    <!-- コメントフォーム -->
+		    <%= form_for [@plan, @plan_comment] do |f| %>
+			    <!-- エラー機能してないけど保留 -->
+				<% if @plan_comment.errors.any? %>
+				    <div class = "alert alert-warning">
+				      <h2><%= @plan_comment.errors.count %> errors prohibited this obj from being saved:</h2>
+				        <ul>
+				            <% @plan_comment.errors.full_messages.each do |message| %>
+				                <li><%= message %></li>
+				            <% end %>
+				        </ul>
+				    </div>
+			    <% end %>
+			    <div class="row">
+			        <div class="col-sm-12">
+			            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントを入力してください" %>
+			        </div>
+			    </div>
+			    <%= f.submit "送信する", class: "btn-sm btn-success pull-right" %>
+			<% end %>
+		<!-- ここまで -->
+		</div>
+
+        <!-- 投稿ユーザのプロフィール -->
+		<div class="col-xs-4">
+			<section class="profile-show">
+				<h3 class="profile-headline">プロフィール</h3>
+				<div>
+					<%= link_to user_path(@plan.user) do %>
+        		        <%= attachment_image_tag @plan.user, :profile_image, size: "170x180", fallback: "no-image-mini.jpg", class: "profile-image-show" %>
+        		    <% end %>
+				</div>
+				<div class="user-name-show">
+					<%= @plan.user.name %>
+				</div>
+				<div class="user-introduction-show">
+					<%= @plan.user.introduction %>
+				</div>
+				<div>
+					<% unless current_user == @user %>
+						<% if current_user.following?(@user) %>
+						    <%= form_for(current_user.relationships.find_by(follow_id: @user.id), html: { method: :delete }) do |f| %>
+						        <%= hidden_field_tag :follow_id, @user.id %>
+						        <%= f.submit 'フォロー外す', class: 'btn btn-danger btn-block' %>
+						    <% end %>
+						<% else %>
+						    <%= form_for(current_user.relationships.build) do |f| %>
+						        <%= hidden_field_tag :follow_id, @user.id %>
+						        <%= f.submit 'フォローする', class: 'btn btn-primary btn-block' %>
+						    <% end %>
+						<% end %>
+				    <% end %>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>

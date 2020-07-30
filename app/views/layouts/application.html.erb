@@ -4,32 +4,33 @@
     <title>Romantic</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b62893b13d.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'  %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
     <!--ヘッダーの記述-->
-    <header class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
+    <header>
         <% if user_signed_in? %>
           <%= render 'layouts/header_user' %>
           <% else %>
           <%= render 'layouts/header_logout' %>
         <% end %>
-      </div>
     </header>
-    <main>
-      <div class="container main-container">
+    <!-- <main> -->
+      <!-- <div class="container main-container"> -->
         <% flash.each do |message_type, message| %>
           <div class="alert alert-<%= message_type %>">
             <%= message %>
           </div>
-        <% end %>  
+        <% end %>
         <%# 各ページ本体 %>
         <%= yield %>
-      </div>
-    </main>
+      <!-- </div> -->
+    <!-- </main> -->
     <footer>
       <div class="container">
         <div class="col-xs-3 col-xs-offset-9">

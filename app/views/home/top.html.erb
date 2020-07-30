@@ -1,2 +1,37 @@
-<h1>Home#top</h1>
-<p>Find me in app/views/home/top.html.erb</p>
+<section class="main-visual">
+	<div class="container">
+		<h1 class="main-title">Romantic</h1>
+		<p class="main-text">素敵な場所、<br>見つけてみませんか？</p>
+	</div>
+</section>
+<!-- 特徴・目的記載 -->
+<section class="feature">
+	<div class="container">
+		<h2 class="feature-heading">Feature</h2>
+		<div class="purpose-group clearfix">
+			<div class="purpose">
+				<i class="fas fa-mail-bulk"></i>
+				<h3 class="purpose-title">purpose1</h3>
+				<p class="purpose-text">お気に入りのデートプランを投稿しよう！</p>
+			</div>
+			<div class="purpose">
+				<i class="far fa-heart"></i>
+				<h3 class="purpose-title">purpose2</h3>
+				<p class="purpose-text">他のユーザーの投稿をいいねしよう！</p>
+			</div>
+			<div class="purpose">
+				<i class="fas fa-user-friends"></i>
+				<h3 class="purpose-title">purpose3</h3>
+				<p class="purpose-text">気になるユーザーをフォローしよう！</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- ここまで -->
+
+<div class="container top-btn-group">
+	<% unless current_user %>
+		<%= link_to "新規登録", new_user_registration_path, class: "top-btn" %>
+	    <%= link_to "ログイン", new_user_session_path, class: "top-btn" %>
+	<% end %>
+</div>

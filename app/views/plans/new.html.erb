@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+    	<h2 class="plan-headline">新規投稿</h2>
+
+    	<%= form_for(@plan) do |f| %>
+    	<!-- エラー文 -->
+    	<% if @plan.errors.any? %>
+    	    <div class = "alert alert-warning">
+    	      <h2><%= @plan.errors.count %> errors prohibited this obj from being saved:</h2>
+    	        <ul>
+    	            <% @plan.errors.full_messages.each do |message| %>
+    	                <li><%= message %></li>
+    	            <% end %>
+    	        </ul>
+    	    </div>
+    	<% end %>
+    	<!-- ここまで -->
+        <div class="col-xs-5">
+        	<div class="field">
+        		<%= f.label :image %>
+                <%= f.attachment_field :image %>
+        	</div>
+        </div>
+        <div class="col-xs-7">
+            <div class="field">
+            	<%= f.label :タイトル %>
+            	<%= f.text_field :title, class: "sign-up-input", placeholder: "題名を入力してください" %>
+            </div>
+            <div class="field">
+                <%= f.label :ポイント %>
+                <%= f.text_field :point, class: "sign-up-input", placeholder: "このプランのポイントを入力してください" %>
+            </div>
+            <div class="field">
+            	<%= f.label :内容 %>
+            	<%= f.text_area :body, class: "sign-up-input introduction", placeholder: "内容を入力してください" %>
+            </div>
+            <div class="field">
+            	<%= f.radio_button :genre, true %>
+            	<%= f.label :genre, "日帰り" %>
+                <%= f.radio_button :genre, false %>
+                <%= f.label :genre, "泊まり" %>
+            </div>
+            <div class="actions row">
+    		<%= f.submit "新規投稿",class: "col-xs-5 sign-up-button" %>
+            </div>
+        </div>
+    	<% end %>
+    	<div class="actions col-xs-3 col-xs-offset-10">
+    	<%= link_to "戻る", user_path(current_user), class: "back-btn fas fa-arrow-circle-left" %>
+        </div>
+    </div>
+</div>
