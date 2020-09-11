@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   def favorite_list
     @user = User.find(params[:id])
-    @plans = @user.favorites
+    @favorites = @user.favorites
   end
 
   private

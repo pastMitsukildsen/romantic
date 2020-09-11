@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'home#top'
   get 'users/:id/follows' => 'users#follows', as: "users_follows"
   get 'users/:id/followers' => 'users#followers', as: "users_followers"
-  get 'users/:id/favoriteslist' => 'users#favorite_list', as: "user_favorites"
+  get 'users/:id/favoriteslist' => 'users#favorite_list', as: "users_favorites"
   resources :relationships, only: [:create, :destroy]
   resources :users,only: [:show,:edit,:update,:destroy]
   resources :plans do
